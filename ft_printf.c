@@ -6,7 +6,14 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 15:16:43 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/24 15:17:27 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/25 13:46:31 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
+
+int	ft_printf(const char *, ...)
+{
+	va_list(args);
+	return (0);
+}
