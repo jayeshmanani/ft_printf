@@ -6,7 +6,7 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 15:16:43 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/27 18:08:55 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/27 18:24:46 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	print_arg(va_list args, const char c)
 		count += handle_string(va_arg(args, char *));
 	else if ((c == 'd') || (c == 'i'))
 		count += handle_decimal(va_arg(args, int));
+	else if (c == 'u')
+		count += handle_uint(va_arg(args, int));
 	return (count);
 }
 
@@ -51,9 +53,16 @@ int	ft_printf(const char *s, ...)
 
 // int	main(void)
 // {
+// 	//string
 // 	// int i = printf(" NULL %s NULL \n", NULL);
 // 	// int j = ft_printf(" NULL %s NULL \n", NULL);
-// 	int i = printf(" %d ", -1);
-// 	int j = ft_printf(" %d ", -1);
+
+// 	//digit
+// 	// int i = printf(" %d ", -1);
+// 	// int j = ft_printf(" %d ", -1);
+
+// 	//uint
+// 	int i = printf(" %u \n", -1);
+// 	int j = ft_printf(" %u \n", -1);
 // 	printf("\nI, J : %d, %d \n", i, j);
 // }

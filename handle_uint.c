@@ -1,25 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   handle_uint.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/25 13:43:14 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/27 18:23:53 by jmanani          ###   ########.fr       */
+/*   Created: 2025/10/27 18:14:52 by jmanani           #+#    #+#             */
+/*   Updated: 2025/10/27 18:24:38 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include "./libft/libft.h"
-# include <stdarg.h>
+void	putuint(unsigned int n)
+{
+	char	print_char;
 
-int	ft_printf(const char *s, ...);
-int	handle_char(int c);
-int	handle_string(char *temp);
-int	handle_decimal(int temp);
-int	handle_uint(int n);
+	if (n >= 10)
+		putuint((n / 10));
+	print_char = (n % 10) + 48;
+	write(1, &print_char, 1);
+}
 
-#endif
+int	handle_uint(int n)
+{
+	int				count;
+	unsigned int	num;
+
+	count = 0;
+	num = (unsigned int)n;
+	putuint(num);
+	if (num == 0)
+		count++;
+	while (num > 0)
+	{
+		count++;
+		num /= 10;
+	}
+	return (count);
+}
