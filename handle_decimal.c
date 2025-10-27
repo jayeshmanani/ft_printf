@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   handle_decimal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/25 13:43:14 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/27 13:17:15 by jmanani          ###   ########.fr       */
+/*   Created: 2025/10/27 13:13:46 by jmanani           #+#    #+#             */
+/*   Updated: 2025/10/27 18:08:58 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include "./libft/libft.h"
-# include <stdarg.h>
+int	handle_decimal(int n)
+{
+	int		count;
+	long	num;
 
-int	ft_printf(const char *s, ...);
-int	handle_char(int c);
-int	handle_string(char *temp);
-int	handle_decimal(int temp);
-
-#endif
+	count = 0;
+	ft_putnbr_fd(n, 1);
+	num = n;
+	if (n <= 0)
+	{
+		count++;
+		num = -num;
+	}
+	while (num > 0)
+	{
+		count++;
+		num /= 10;
+	}
+	return (count);
+}
