@@ -6,7 +6,7 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 15:16:43 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/27 11:10:05 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/27 12:06:15 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	print_arg(va_list args, const char c)
 	{
 		temp = va_arg(args, char *);
 		if (!temp)
-			return (count);
+			temp = "(null)";
 		count += ft_strlen(temp);
 		ft_putstr_fd(temp, 1);
 	}
@@ -57,8 +57,7 @@ int	ft_printf(const char *s, ...)
 // int	main(void)
 // {
 // 	// ft_printf("String: %s\n", "HELLO");
-// 	int i = printf("%c", '0');
-// 	int j = ft_printf("%c", '0');
+// 	int i = printf(" NULL %s NULL \n", NULL);
+// 	int j = ft_printf(" NULL %s NULL \n", NULL);
 // 	printf("\nI, J : %d, %d \n", i, j);
-	
 // }
