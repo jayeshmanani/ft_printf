@@ -6,7 +6,7 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 15:16:43 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/25 18:04:29 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/27 11:10:05 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,9 @@ int	print_arg(va_list args, const char c)
 {
 	int		count;
 	char	*temp;
-	int		inp;
 
 	count = 0;
-	if (c == 'c')
-	{
-		// ft_putchar_fd(va_arg(args, int), 1);
-		// count++;
-		inp = va_arg(args, int);
-		if (inp)
-			count += handle_char(inp);
-	}
-	else if (c == 's')
+	if (c == 's')
 	{
 		temp = va_arg(args, char *);
 		if (!temp)
@@ -42,17 +33,19 @@ int	ft_printf(const char *s, ...)
 {
 	int	count;
 
-	// char	c;
 	count = 0;
 	va_list(args);
 	va_start(args, s);
-	while (*s)
+	while (*s != '\0')
 	{
 		if (*s != '%')
-			ft_putchar_fd(*s, 1);
+			count += handle_char(*s);
 		else
 		{
-			count += print_arg(args, *(s + 1));
+			if (*(s + 1) == 'c')
+				count += handle_char(va_arg(args, int));
+			else
+				count += print_arg(args, *(s + 1));
 			s++;
 		}
 		s++;
@@ -63,6 +56,9 @@ int	ft_printf(const char *s, ...)
 
 // int	main(void)
 // {
-// 	ft_printf("String: %s\n", "HELLO");
+// 	// ft_printf("String: %s\n", "HELLO");
+// 	int i = printf("%c", '0');
+// 	int j = ft_printf("%c", '0');
+// 	printf("\nI, J : %d, %d \n", i, j);
+	
 // }
-
