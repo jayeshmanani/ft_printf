@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   handle_string.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/25 13:43:14 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/27 12:13:53 by jmanani          ###   ########.fr       */
+/*   Created: 2025/10/27 12:07:23 by jmanani           #+#    #+#             */
+/*   Updated: 2025/10/27 12:15:40 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include "./libft/libft.h"
-# include <stdarg.h>
+int	handle_string(char *temp)
+{
+	int	count;
 
-int	ft_printf(const char *s, ...);
-int	handle_char(int c);
-int	handle_string(char *temp);
-
-#endif
+	count = 0;
+	if (!temp)
+		temp = "(null)";
+	count += ft_strlen(temp);
+	ft_putstr_fd(temp, 1);
+	return (count);
+}

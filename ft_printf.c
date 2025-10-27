@@ -6,7 +6,7 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 15:16:43 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/27 12:06:15 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/27 12:15:42 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,11 @@
 
 int	print_arg(va_list args, const char c)
 {
-	int		count;
-	char	*temp;
+	int	count;
 
 	count = 0;
 	if (c == 's')
-	{
-		temp = va_arg(args, char *);
-		if (!temp)
-			temp = "(null)";
-		count += ft_strlen(temp);
-		ft_putstr_fd(temp, 1);
-	}
+		count += handle_string(va_arg(args, char *));
 	return (count);
 }
 
