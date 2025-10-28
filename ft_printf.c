@@ -6,7 +6,7 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 15:16:43 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/28 13:21:35 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/28 13:33:05 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	handle_pointer(void *num)
 	int				count;
 
 	count = 0;
+	if (!num)
+		return (write(1, "(nil)", 5));
 	nbr = (unsigned long)num;
 	count += write(1, "0x", 2);
 	convert_ulong_to_base(nbr, 16, "0123456789abcdef");
@@ -91,27 +93,27 @@ int	ft_printf(const char *s, ...)
 	return (count);
 }
 
-int	main(void)
-{
-	int	myAge;
-	int	i;
-	int	j;
+// int	main(void)
+// {
+// 	int	myAge;
+// 	int	i;
+// 	int	j;
 
-	// string
-	// int i = printf(" NULL %s NULL \n", NULL);
-	// int j = ft_printf(" NULL %s NULL \n", NULL);
-	// digit
-	// int i = printf(" %d ", -1);
-	// int j = ft_printf(" %d ", -1);
-	// uint
-	// int i = printf(" %u \n", -1);
-	// int j = ft_printf(" %u \n", -1);
-	// X and x (hex)
-	// int i = printf(" %x \n", -1);
-	// int j = ft_printf(" %x \n", -1);
-	// %p
-	myAge = 0;
-	i = printf(" %p %p \n", 0, 0);
-	j = ft_printf(" %p %p \n", 0, 0);
-	printf("\nI, J : %d, %d \n", i, j);
-}
+// 	// string
+// 	// int i = printf(" NULL %s NULL \n", NULL);
+// 	// int j = ft_printf(" NULL %s NULL \n", NULL);
+// 	// digit
+// 	// int i = printf(" %d ", -1);
+// 	// int j = ft_printf(" %d ", -1);
+// 	// uint
+// 	// int i = printf(" %u \n", -1);
+// 	// int j = ft_printf(" %u \n", -1);
+// 	// X and x (hex)
+// 	// int i = printf(" %x \n", -1);
+// 	// int j = ft_printf(" %x \n", -1);
+// 	// %p
+// 	myAge = 0;
+// 	i = printf(" %p %p \n", NULL, NULL);
+// 	j = ft_printf(" %p %p \n", NULL, NULL);
+// 	printf("\nI, J : %d, %d \n", i, j);
+// }
