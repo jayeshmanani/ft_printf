@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_decimal.c                                   :+:      :+:    :+:   */
+/*   ft_count_digits.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/27 13:13:46 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/28 11:32:46 by jmanani          ###   ########.fr       */
+/*   Created: 2025/10/28 11:26:53 by jmanani           #+#    #+#             */
+/*   Updated: 2025/10/28 11:29:09 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	handle_decimal(int n)
+int	count_digits(long num)
 {
-	// ft_putnbr_fd(n, 1);
-	ft_putnbr_base(n, "0123456789", 'd');
-	return (count_digits((long)n));
+	int	count;
+
+	count = 0;
+	if (num <= 0)
+	{
+		count++;
+		num = -num;
+	}
+	while (num > 0)
+	{
+		num /= 10;
+		count++;
+	}
+	return (count);
 }
