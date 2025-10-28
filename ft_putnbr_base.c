@@ -6,7 +6,7 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 11:30:15 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/28 12:27:10 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/28 13:20:37 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,7 @@ int	ft_putnbr_base(int nbr, char *base, char c)
 	int		count;
 
 	count = 0;
-	if ((c == 'x') || (c == 'X'))
-		num = (unsigned int)nbr;
-	else if (c == 'u')
+	if ((c == 'x') || (c == 'X') || (c == 'u'))
 		num = (unsigned int)nbr;
 	base_letters = count_base_letter(base);
 	if (base_letters < 2)

@@ -6,11 +6,45 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 15:16:43 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/28 12:23:25 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/28 13:21:35 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int	ft_count_ulong(unsigned long nbr, size_t count)
+{
+	int	digs;
+
+	digs = 1;
+	if (nbr < 0)
+	{
+		nbr = -nbr;
+		digs++;
+	}
+	if (nbr < count)
+		return (digs);
+	return (digs + ft_count_digits(nbr / count, count));
+}
+
+void	convert_ulong_to_base(unsigned long nbr, size_t count, char *base)
+{
+	if (nbr >= count)
+		convert_ulong_to_base(nbr / count, count, base);
+	write(1, &(base[nbr % count]), 1);
+}
+
+int	handle_pointer(void *num)
+{
+	unsigned long	nbr;
+	int				count;
+
+	count = 0;
+	nbr = (unsigned long)num;
+	count += write(1, "0x", 2);
+	convert_ulong_to_base(nbr, 16, "0123456789abcdef");
+	return (count + ft_count_ulong(nbr, 16));
+}
 
 int	print_arg(va_list args, const char c)
 {
@@ -27,6 +61,8 @@ int	print_arg(va_list args, const char c)
 		count += write(1, &c, 1);
 	else if (c == 'x' | c == 'X')
 		count += handle_hex(va_arg(args, int), c);
+	else if (c == 'p')
+		count += handle_pointer(va_arg(args, void *));
 	return (count);
 }
 
@@ -55,22 +91,27 @@ int	ft_printf(const char *s, ...)
 	return (count);
 }
 
-// int	main(void)
-// {
-// 	//string
-// 	// int i = printf(" NULL %s NULL \n", NULL);
-// 	// int j = ft_printf(" NULL %s NULL \n", NULL);
+int	main(void)
+{
+	int	myAge;
+	int	i;
+	int	j;
 
-// 	// digit
-// 	int i = printf(" %d ", -1);
-// 	int j = ft_printf(" %d ", -1);
-
-// 	//uint
-// 	// int i = printf(" %u \n", -1);
-// 	// int j = ft_printf(" %u \n", -1);
-
-// 	// X and x (hex)
-// 	// int i = printf(" %x \n", -1);
-// 	// int j = ft_printf(" %x \n", -1);
-// 	printf("\nI, J : %d, %d \n", i, j);
-// }
+	// string
+	// int i = printf(" NULL %s NULL \n", NULL);
+	// int j = ft_printf(" NULL %s NULL \n", NULL);
+	// digit
+	// int i = printf(" %d ", -1);
+	// int j = ft_printf(" %d ", -1);
+	// uint
+	// int i = printf(" %u \n", -1);
+	// int j = ft_printf(" %u \n", -1);
+	// X and x (hex)
+	// int i = printf(" %x \n", -1);
+	// int j = ft_printf(" %x \n", -1);
+	// %p
+	myAge = 0;
+	i = printf(" %p %p \n", 0, 0);
+	j = ft_printf(" %p %p \n", 0, 0);
+	printf("\nI, J : %d, %d \n", i, j);
+}
