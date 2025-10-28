@@ -6,7 +6,7 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 13:13:46 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/28 11:32:46 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/28 12:28:06 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	handle_decimal(int n)
 {
-	// ft_putnbr_fd(n, 1);
-	ft_putnbr_base(n, "0123456789", 'd');
-	return (count_digits((long)n));
+	ft_putnbr_fd(n, 1);
+	return (ft_count_digits((long)n, 10));
 }

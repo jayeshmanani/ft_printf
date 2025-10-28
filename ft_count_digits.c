@@ -6,26 +6,23 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 11:26:53 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/28 11:29:09 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/28 12:28:05 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	count_digits(long num)
+int	ft_count_digits(long nbr, int count)
 {
-	int	count;
+	int	digs;
 
-	count = 0;
-	if (num <= 0)
+	digs = 1;
+	if (nbr < 0)
 	{
-		count++;
-		num = -num;
+		nbr = -nbr;
+		digs++;
 	}
-	while (num > 0)
-	{
-		num /= 10;
-		count++;
-	}
-	return (count);
+	if (nbr < count)
+		return (digs);
+	return (digs + ft_count_digits(nbr / count, count));
 }

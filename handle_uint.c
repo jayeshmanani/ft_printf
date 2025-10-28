@@ -6,7 +6,7 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 18:14:52 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/28 11:31:25 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/28 12:27:15 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 int	handle_uint(int n)
 {
 	ft_putnbr_base(n, "0123456789", 'u');
-	return (count_digits((unsigned int)n));
+	return (ft_count_digits((unsigned int)n, 10));
 }

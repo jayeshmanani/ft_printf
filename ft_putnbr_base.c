@@ -6,7 +6,7 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 11:30:15 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/28 11:32:52 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/28 12:27:10 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,21 @@ int	count_base_letter(char *base)
 
 void	convert_numbers_to_base(long nbr, int count, char *base)
 {
-	char	display;
-
 	if (nbr >= count)
-	{
 		convert_numbers_to_base(nbr / count, count, base);
-	}
-	display = base[nbr % count];
-	write(1, &display, 1);
+	write(1, &(base[nbr % count]), 1);
 }
 
-void	ft_putnbr_base(int nbr, char *base, char c)
+int	ft_putnbr_base(int nbr, char *base, char c)
 {
 	int		base_letters;
 	long	num;
+	int		count;
 
+	count = 0;
 	if ((c == 'x') || (c == 'X'))
 		num = (unsigned int)nbr;
-	if (c == 'u')
+	else if (c == 'u')
 		num = (unsigned int)nbr;
 	base_letters = count_base_letter(base);
 	if (base_letters < 2)
@@ -63,7 +60,14 @@ void	ft_putnbr_base(int nbr, char *base, char c)
 		if (num < 0)
 		{
 			num = -num;
+			count++;
 		}
 		convert_numbers_to_base(num, base_letters, base);
 	}
+	return (count + ft_count_digits(num, base_letters));
 }
+
+// int	main(void)
+// {
+// 	printf("Digits are: %d\n", ft_putnbr_base(-1, "0123456789abcdef", 'x'));
+// }
