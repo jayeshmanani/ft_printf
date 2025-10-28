@@ -6,7 +6,7 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 15:16:43 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/28 13:33:05 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/28 13:47:28 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ int	print_arg(va_list args, const char c)
 	if (c == 's')
 		count += handle_string(va_arg(args, char *));
 	else if ((c == 'd') || (c == 'i'))
-		count += handle_decimal(va_arg(args, int));
+		count += handle_numbers(va_arg(args, int), c);
 	else if (c == 'u')
-		count += handle_uint(va_arg(args, int));
+		count += handle_numbers(va_arg(args, int), c);
 	else if (c == '%')
 		count += write(1, &c, 1);
 	else if (c == 'x' | c == 'X')
-		count += handle_hex(va_arg(args, int), c);
+		count += handle_numbers(va_arg(args, int), c);
 	else if (c == 'p')
 		count += handle_pointer(va_arg(args, void *));
 	return (count);

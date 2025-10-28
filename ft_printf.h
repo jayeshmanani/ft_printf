@@ -6,7 +6,7 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 13:43:14 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/28 12:23:20 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/28 13:45:45 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@
 int	ft_printf(const char *s, ...);
 int	handle_char(int c);
 int	handle_string(char *temp);
-int	handle_decimal(int temp);
-int	handle_uint(int n);
-int	handle_hex(int n, char c);
+// int	handle_decimal(int temp);
 int	ft_count_digits(long nbr, int count);
 int	ft_putnbr_base(int nbr, char *base, char c);
+int	handle_numbers(int n, char c);
 
 #endif

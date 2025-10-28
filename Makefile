@@ -6,7 +6,7 @@
 #    By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/24 14:12:49 by jmanani           #+#    #+#              #
-#    Updated: 2025/10/28 11:30:47 by jmanani          ###   ########.fr        #
+#    Updated: 2025/10/28 13:47:05 by jmanani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,8 @@ LIBFT_NAME = libft.a
 
 LIBFT_FOLDER= ./libft
 
-SRCS = ft_printf.c handle_char.c handle_string.c handle_decimal.c\
-		handle_uint.c handle_hex.c ft_count_digits.c ft_putnbr_base.c\
-		
+SRCS = ft_printf.c handle_char.c handle_string.c\
+		ft_count_digits.c ft_putnbr_base.c handle_numbers.c\
 
 OBJS = $(SRCS:.c=.o)
 
