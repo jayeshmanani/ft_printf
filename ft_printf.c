@@ -6,7 +6,7 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 15:16:43 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/29 14:30:18 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/29 15:10:22 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ int	print_arg(va_list args, const char c)
 
 int	ft_printf(const char *s, ...)
 {
-	int	count;
+	int		count;
+	va_list	args;
 
 	count = 0;
-	va_list(args);
 	va_start(args, s);
 	while (*s != '\0')
 	{
@@ -100,6 +100,7 @@ int	ft_printf(const char *s, ...)
 // 	int	j;
 
 // 	// string
+// printf("ndfhasbfhlsabhl d alsdnas dnbASDNAL  %s %d  %u ", "Hello", 10, 1);
 // 	// int i = printf(" heheh  NULL %s NULL \n", NULL);
 // 	// int j = ft_printf(" NULL %s NULL \n", NULL);
 // 	// digit

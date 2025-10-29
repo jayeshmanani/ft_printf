@@ -6,7 +6,7 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 11:30:15 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/28 13:20:37 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/29 15:10:28 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,5 @@ int	ft_putnbr_base(int nbr, char *base, char c)
 
 // int	main(void)
 // {
-// 	printf("Digits are: %d\n", ft_putnbr_base(-1, "0123456789abcdef", 'x'));
+// 	printf("Digits are: %c\n", ft_putnbr_base(-1, "0123456789abcdef", 'x'));
 // }
