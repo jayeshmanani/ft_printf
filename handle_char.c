@@ -6,7 +6,7 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 14:57:05 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/27 12:10:44 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/29 12:21:27 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,5 @@
 
 int	handle_char(int arg)
 {
-	ft_putchar_fd(arg, 1);
-	return (1);
+	return (write(1, &arg, 1));
 }

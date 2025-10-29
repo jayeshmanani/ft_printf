@@ -6,7 +6,7 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 15:16:43 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/28 13:49:52 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/29 12:19:44 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	ft_printf(const char *s, ...)
 // 	int	j;
 
 // 	// string
-// 	// int i = printf(" NULL %s NULL \n", NULL);
+// 	// int i = printf(" heheh  NULL %s NULL \n", NULL);
 // 	// int j = ft_printf(" NULL %s NULL \n", NULL);
 // 	// digit
 // 	// int i = printf(" %d ", -1);

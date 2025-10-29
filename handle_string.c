@@ -6,11 +6,35 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 12:07:23 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/27 13:13:59 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/29 11:48:52 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+size_t	ft_strlen(const char *s)
+{
+	int	count;
+
+	count = 0;
+	while (*s)
+	{
+		count++;
+		s++;
+	}
+	return (count);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (s != NULL)
+	{
+		while (*s)
+		{
+			write(fd, s++, 1);
+		}
+	}
+}
 
 int	handle_string(char *temp)
 {

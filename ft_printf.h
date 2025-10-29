@@ -6,15 +6,20 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 13:43:14 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/28 14:15:45 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/29 12:07:19 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "./libft/libft.h"
 # include <stdarg.h>
+# include <stdbool.h>
+# include <stddef.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
 
 int	ft_printf(const char *s, ...);
 int	handle_char(int c);
