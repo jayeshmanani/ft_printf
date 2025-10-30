@@ -6,13 +6,13 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 15:16:43 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/30 17:07:09 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/30 17:12:14 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	handle_char(int arg)
+int	ft_handle_char(int arg)
 {
 	char	c;
 	int		wr;
@@ -24,7 +24,7 @@ int	handle_char(int arg)
 	return (wr);
 }
 
-int	handle_string(char *temp)
+int	ft_handle_string(char *temp)
 {
 	int	i;
 
@@ -33,7 +33,7 @@ int	handle_string(char *temp)
 		temp = "(null)";
 	while (temp[i])
 	{
-		if (handle_char((int)temp[i]) == -1)
+		if (ft_handle_char((int)temp[i]) == -1)
 			return (-1);
 		i++;
 	}
@@ -43,15 +43,15 @@ int	handle_string(char *temp)
 static int	print_arg(va_list args, char c)
 {
 	if (c == 'c')
-		return (handle_char(va_arg(args, int)));
+		return (ft_handle_char(va_arg(args, int)));
 	if (c == 's')
-		return (handle_string(va_arg(args, char *)));
+		return (ft_handle_string(va_arg(args, char *)));
 	if (c == 'd' || c == 'i' || c == 'u' || c == 'x' || c == 'X')
-		return (handle_numbers(va_arg(args, int), c));
+		return (ft_handle_numbers(va_arg(args, int), c));
 	if (c == 'p')
-		return (handle_pointer(va_arg(args, void *)));
+		return (ft_handle_pointer(va_arg(args, void *)));
 	if (c == '%')
-		return (handle_char('%'));
+		return (ft_handle_char('%'));
 	return (0);
 }
 
@@ -73,7 +73,7 @@ int	ft_printf(const char *s, ...)
 			r = print_arg(args, *s++);
 		}
 		else
-			r = handle_char((int)*s++);
+			r = ft_handle_char((int)*s++);
 		if (r == -1)
 			break ;
 		count += r;

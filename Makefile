@@ -6,7 +6,7 @@
 #    By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/24 14:12:49 by jmanani           #+#    #+#              #
-#    Updated: 2025/10/30 17:00:15 by jmanani          ###   ########.fr        #
+#    Updated: 2025/10/30 17:12:08 by jmanani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ RM= rm -f
 
 NAME= libftprintf.a
 
-SRCS = ft_printf.c handle_numbers.c
+SRCS = ft_printf.c ft_handle_numbers.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 13:43:14 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/30 17:00:16 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/30 17:12:19 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include <unistd.h>
 
 int	ft_printf(const char *s, ...);
-int	handle_char(int c);
-int	handle_string(char *temp);
-int	handle_numbers(int n, char c);
-int	handle_pointer(void *p);
+int	ft_handle_char(int c);
+int	ft_handle_string(char *temp);
+int	ft_handle_numbers(int n, char c);
+int	ft_handle_pointer(void *p);
 
 #endif
