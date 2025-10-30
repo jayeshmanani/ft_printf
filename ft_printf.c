@@ -6,7 +6,7 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 15:16:43 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/30 16:47:51 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/30 17:07:09 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,18 @@ int	handle_string(char *temp)
 	return (i);
 }
 
-static int	print_arg(va_list *args, char c)
+static int	print_arg(va_list args, char c)
 {
-	int	wr;
-
 	if (c == 'c')
-		return (handle_char(va_arg(*args, int)));
+		return (handle_char(va_arg(args, int)));
 	if (c == 's')
-		return (handle_string(va_arg(*args, char *)));
+		return (handle_string(va_arg(args, char *)));
 	if (c == 'd' || c == 'i' || c == 'u' || c == 'x' || c == 'X')
-		return (handle_numbers(va_arg(*args, int), c));
+		return (handle_numbers(va_arg(args, int), c));
 	if (c == 'p')
-		return (handle_pointer(va_arg(*args, void *)));
+		return (handle_pointer(va_arg(args, void *)));
 	if (c == '%')
-	{
-		wr = handle_char('%');
-		if (wr == -1)
-			return (-1);
-		return (wr);
-	}
+		return (handle_char('%'));
 	return (0);
 }
 
@@ -77,7 +70,7 @@ int	ft_printf(const char *s, ...)
 			s++;
 			if (!*s)
 				break ;
-			r = print_arg(&args, *s++);
+			r = print_arg(args, *s++);
 		}
 		else
 			r = handle_char((int)*s++);
