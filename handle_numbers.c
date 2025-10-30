@@ -6,36 +6,43 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 13:41:40 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/30 16:46:43 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/30 16:53:46 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+/* recursive printing avoids an explicit buffer and writes digits
+ * from most-significant to least-significant using handle_char
+ */
+static int	print_unsigned_rec(unsigned long long n, int base,
+		const char *digits)
+{
+	int	cnt;
+	int	r;
+
+	cnt = 0;
+	if (n >= (unsigned)base)
+	{
+		cnt = print_unsigned_rec(n / base, base, digits);
+		if (cnt == -1)
+			return (-1);
+	}
+	r = handle_char((int)digits[n % base]);
+	if (r == -1)
+		return (-1);
+	return (cnt + r);
+}
+
 static int	print_unsigned(unsigned long long n, int base, const char *digits)
 {
-	char	buf[65];
-	int		i;
-	int		wr;
-	int		r;
-
-	i = 0;
 	if (n == 0)
-		return (handle_char('0'));
-	while (n)
 	{
-		buf[i++] = digits[n % base];
-		n /= base;
-	}
-	wr = 0;
-	while (i--)
-	{
-		r = handle_char((int)buf[i]);
-		if (r == -1)
+		if (handle_char('0') == -1)
 			return (-1);
-		wr += r;
+		return (1);
 	}
-	return (wr);
+	return (print_unsigned_rec(n, base, digits));
 }
 
 static int	print_signed(long num)
@@ -81,10 +88,7 @@ int	handle_pointer(void *p)
 
 	if (!p)
 	{
-		r = write(1, "(nil)", 5);
-		if (r == -1)
-			return (-1);
-		return (r);
+		return (handle_string("(nil)"));
 	}
 	if (write(1, "0x", 2) == -1)
 		return (-1);
