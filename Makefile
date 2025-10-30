@@ -6,7 +6,7 @@
 #    By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/24 14:12:49 by jmanani           #+#    #+#              #
-#    Updated: 2025/10/29 14:32:12 by jmanani          ###   ########.fr        #
+#    Updated: 2025/10/30 14:01:34 by jmanani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
+# 	cc $(CFLAGS) $(OBJS) -o $(NAME)
 
 clean:
 	$(RM) $(OBJS)
