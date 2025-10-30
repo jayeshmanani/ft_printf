@@ -1,0 +1,42 @@
+name: Francinette CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  francinette:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout your repo
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2️⃣ Set up Docker Buildx (for caching if we rebuild the image)
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # 3️⃣ Optional: Use GitHub cache for Docker layers (if rebuild the image)
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-docker-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-docker-
+
+      # 4️⃣ Pull the public Francinette image (fast, Docker cache)
+      - name: Pull Francinette Docker image
+        run: docker pull jaymanani/francinette:latest || true
+
+      # 5️⃣ Run both normal + strict tests in a single container
+      - name: Run Francinette normal + strict tests
+        run: |
+          docker run --rm -t \
+            -v ${{ github.workspace }}:/project \
+            -w /project \
+            jaymanani/francinette:latest \
+            /bin/bash -c "/francinette/tester.sh && /francinette/tester.sh -s"
