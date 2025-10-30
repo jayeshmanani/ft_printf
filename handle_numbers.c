@@ -6,53 +6,91 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 13:41:40 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/30 15:38:49 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/30 16:42:42 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnbr_fd(int n, int fd)
+static int	print_unsigned(unsigned long long n, int base, const char *digits)
 {
-	long	num;
-	int		rep;
+	char	buf[65];
+	int		i;
+	int		wr;
+	int		r;
 
-	(void)fd;
-	num = n;
+	i = 0;
+	if (n == 0)
+		return (handle_char('0'));
+	while (n)
+	{
+		buf[i++] = digits[n % base];
+		n /= base;
+	}
+	wr = 0;
+	while (i--)
+	{
+		r = handle_char((int)buf[i]);
+		if (r == -1)
+			return (-1);
+		wr += r;
+	}
+	return (wr);
+}
+
+static int	print_signed(long num)
+{
+	unsigned long long	un;
+	int					cnt;
+	int					r;
+
+	cnt = 0;
 	if (num < 0)
 	{
-		if (handle_char('-') == -1)
+		r = handle_char('-');
+		if (r == -1)
 			return (-1);
-		num = -num;
+		cnt += r;
+		un = (unsigned long long)(-num);
 	}
-	if (num >= 10)
-	{
-		rep = ft_putnbr_fd((int)(num / 10), fd);
-		if (rep == -1)
-			return (-1);
-	}
-	if (handle_char((int)((num % 10) + 48)) == -1)
+	else
+		un = (unsigned long long)num;
+	r = print_unsigned(un, 10, "0123456789");
+	if (r == -1)
 		return (-1);
-	return (0);
+	return (cnt + r);
 }
 
 int	handle_numbers(int n, char c)
 {
-	int	ret;
-
+	if (c == 'd' || c == 'i')
+		return (print_signed((long)n));
+	if (c == 'u')
+		return (print_unsigned((unsigned int)n, 10, "0123456789"));
 	if (c == 'x')
-		return (ft_putnbr_base(n, "0123456789abcdef", c));
-	else if (c == 'X')
-		return (ft_putnbr_base(n, "0123456789ABCDEF", c));
-	else if (c == 'd' || c == 'i')
+		return (print_unsigned((unsigned int)n, 16, "0123456789abcdef"));
+	if (c == 'X')
+		return (print_unsigned((unsigned int)n, 16, "0123456789ABCDEF"));
+	return (0);
+}
+
+int	handle_pointer(void *p)
+{
+	unsigned long long	addr;
+	int					r;
+
+	if (!p)
 	{
-		ret = ft_putnbr_fd(n, 1);
-		if (ret == -1)
+		r = write(1, "(nil)", 5);
+		if (r == -1)
 			return (-1);
-		return (ft_count_digits((long)n, 10));
+		return (r);
 	}
-	ret = ft_putnbr_base(n, "0123456789", 'u');
-	if (ret == -1)
+	if (write(1, "0x", 2) == -1)
 		return (-1);
-	return (ft_count_digits((unsigned int)n, 10));
+	addr = (unsigned long long)p;
+	r = print_unsigned(addr, 16, "0123456789abcdef");
+	if (r == -1)
+		return (-1);
+	return (2 + r);
 }

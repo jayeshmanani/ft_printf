@@ -6,131 +6,60 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 15:16:43 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/30 15:37:36 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/30 16:39:36 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_count_ulong(unsigned long nbr, size_t count)
+static int	print_arg(va_list *args, char c)
 {
-	int	digs;
+	int	wr;
 
-	digs = 1;
-	if (nbr < count)
-		return (digs);
-	return (digs + ft_count_digits((long)(nbr / count), count));
-}
-
-int	convert_ulong_to_base(unsigned long nbr, size_t count, char *base)
-{
-	int ret;
-
-	if (nbr >= count)
-	{
-		ret = convert_ulong_to_base(nbr / count, count, base);
-		if (ret == -1)
-			return (-1);
-	}
-	if (handle_char((int)base[nbr % count]) == -1)
-		return (-1);
-	return (0);
-}
-
-int	handle_pointer(void *num)
-{
-	unsigned long	nbr;
-	int				count;
-	int				wr;
-
-	count = 0;
-	if (!num)
-	{
-		wr = write(1, "(nil)", 5);
-		if (wr == -1)
-			return (-1);
-		return (wr);
-	}
-	nbr = (unsigned long)num;
-	wr = write(1, "0x", 2);
-	if (wr == -1)
-		return (-1);
-	count += wr;
-	if (convert_ulong_to_base(nbr, 16, "0123456789abcdef") == -1)
-		return (-1);
-	return (count + ft_count_ulong(nbr, 16));
-}
-
-int	print_arg(va_list args, const char c)
-{
-	int	count;
-	count = 0;
+	if (c == 'c')
+		return (handle_char(va_arg(*args, int)));
 	if (c == 's')
-		return (handle_string(va_arg(args, char *)));
-	else if ((c == 'd') || (c == 'i'))
-		return (handle_numbers(va_arg(args, int), c));
-	else if (c == 'u')
-		return (handle_numbers(va_arg(args, unsigned int), c));
-	else if (c == '%')
+		return (handle_string(va_arg(*args, char *)));
+	if (c == 'd' || c == 'i' || c == 'u' || c == 'x' || c == 'X')
+		return (handle_numbers(va_arg(*args, int), c));
+	if (c == 'p')
+		return (handle_pointer(va_arg(*args, void *)));
+	if (c == '%')
 	{
-		int wr = write(1, &c, 1);
+		wr = write(1, "%%", 1);
 		if (wr == -1)
 			return (-1);
 		return (wr);
 	}
-	else if (c == 'x' || c == 'X')
-		return (handle_numbers(va_arg(args, int), c));
-	else if (c == 'p')
-		return (handle_pointer(va_arg(args, void *)));
 	return (0);
 }
 
 int	ft_printf(const char *s, ...)
 {
 	int		count;
+	int		r;
 	va_list	args;
 
 	count = 0;
 	va_start(args, s);
-	while (*s != '\0')
+	while (*s)
 	{
-		if (*s != '%')
+		if (*s == '%')
 		{
-			int ret = handle_char((int)*s);
-			if (ret == -1)
-			{
-				va_end(args);
-				return (-1);
-			}
-			count += ret;
+			s++;
+			if (!*s)
+				break ;
+			r = print_arg(&args, *s++);
 		}
 		else
-		{
-			if (*(s + 1) == 'c')
-			{
-				int ret = handle_char(va_arg(args, int));
-				if (ret == -1)
-				{
-					va_end(args);
-					return (-1);
-				}
-				count += ret;
-			}
-			else
-			{
-				int ret = print_arg(args, *(s + 1));
-				if (ret == -1)
-				{
-					va_end(args);
-					return (-1);
-				}
-				count += ret;
-			}
-			s++;
-		}
-		s++;
+			r = handle_char((int)*s++);
+		if (r == -1)
+			break ;
+		count += r;
 	}
 	va_end(args);
+	if (r == -1)
+		return (-1);
 	return (count);
 }
 

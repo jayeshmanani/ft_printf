@@ -6,7 +6,7 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 14:57:05 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/30 15:40:18 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/30 16:39:29 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	handle_char(int arg)
 {
-	char c;
-	int  wr;
+	char	c;
+	int		wr;
 
 	c = (char)arg;
 	wr = write(1, &c, 1);
