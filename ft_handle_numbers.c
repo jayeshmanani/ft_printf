@@ -75,7 +75,7 @@ int	ft_handle_pointer(void *p)
 	int					r;
 
 	if (!p)
-		return (ft_handle_string("(nil)"));
+		return (ft_handle_string(NULL_PTR_STR));
 	if (write(1, "0x", 2) == -1)
 		return (-1);
 	addr = (unsigned long long)p;

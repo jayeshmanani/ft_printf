@@ -22,4 +22,11 @@ int	ft_handle_string(char *temp);
 int	ft_handle_numbers(int n, char c);
 int	ft_handle_pointer(void *p);
 
+/* platform-specific NULL pointer string */
+# ifdef __APPLE__
+#  define NULL_PTR_STR "0x0"
+# else
+#  define NULL_PTR_STR "(nil)"
+# endif
+
 #endif
