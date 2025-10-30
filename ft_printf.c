@@ -6,11 +6,39 @@
 /*   By: jmanani <jmanani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 15:16:43 by jmanani           #+#    #+#             */
-/*   Updated: 2025/10/30 16:39:36 by jmanani          ###   ########.fr       */
+/*   Updated: 2025/10/30 16:47:51 by jmanani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int	handle_char(int arg)
+{
+	char	c;
+	int		wr;
+
+	c = (char)arg;
+	wr = write(1, &c, 1);
+	if (wr == -1)
+		return (-1);
+	return (wr);
+}
+
+int	handle_string(char *temp)
+{
+	int	i;
+
+	i = 0;
+	if (!temp)
+		temp = "(null)";
+	while (temp[i])
+	{
+		if (handle_char((int)temp[i]) == -1)
+			return (-1);
+		i++;
+	}
+	return (i);
+}
 
 static int	print_arg(va_list *args, char c)
 {
@@ -26,7 +54,7 @@ static int	print_arg(va_list *args, char c)
 		return (handle_pointer(va_arg(*args, void *)));
 	if (c == '%')
 	{
-		wr = write(1, "%%", 1);
+		wr = handle_char('%');
 		if (wr == -1)
 			return (-1);
 		return (wr);
